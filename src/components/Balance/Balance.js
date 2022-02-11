@@ -1,21 +1,30 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
+//import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import s from '../Balance/Balance.module.css';
 import sprite from '../../Images/sprite.svg';
 import ModalBalance from '../ModalBalance';
+//import { getBalance } from '../../redux/finance/finance-selectors';
 
 
 export default function Balance() {
+  // const dispatch = useDispatch();
+  // const oldbalance = useSelector(getBalance);
   const [balance, setBalance] = useState('');
 
   const onHandleChange = e => {
     setBalance(e.target.value);
   };
-
-  const [modalClose, setModalClose] = useState(true);
-    const toggleModal = () => {
-        setModalClose(!modalClose);
-    };
-
+  const clickOnBtn = e => {
+    e.preventDefault();
+    const valueInput = e.target.value;
+    if (!valueInput) {
+      toast.error('Пожалуйста, введите правильное значение!');
+    }
+  };
+      
   return (
     <div className={s.container}>
       <div className={s.containerLeft}>
@@ -41,15 +50,18 @@ export default function Balance() {
                 value={`${balance}`}
                 placeholder="00.00 UAH"
               />
-
-              <button type="submit" className={`${s.confirm} ${s.btn}`}>
+              <button
+                className={`${s.confirm} ${s.btn}`}
+                type="submit"
+                onClick={clickOnBtn}
+              >
                 ПОДТВЕРДИТЬ
               </button>
             </div>
           </div>
         </form>
       </div>
-      {modalClose && <ModalBalance onClick={toggleModal} />}
+      {!+balance && <ModalBalance />}
     </div>
   );
 }

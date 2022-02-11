@@ -4,7 +4,8 @@
     max-height: 163px;
     max-width: 282px;
     padding: 30px 25px 31px 25px;
-    position: relative;
+    position: absolute;
+    top: 182px;
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
@@ -39,17 +40,18 @@
 
 @media screen and (min-width: 768px) {
     .modal_balance {
-        position: absolute;
-        top: 98px;
-        left: 137px;
+        max-height: 163px;
+        max-width: 292px;
+        top: 156px;
+        left: 145px;
     }
 }
 
 @media screen and (min-width: 1280px) {
     .modal_balance {
-        position: absolute;
-        top: 98px;
-        left: 495px;
+        
+        top: 156px;
+        left: 524px;
         max-height: 163px;
         max-width: 292px;
     }
