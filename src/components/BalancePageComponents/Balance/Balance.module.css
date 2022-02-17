@@ -1,6 +1,6 @@
 @media screen and (max-width: 767px) {
   .container {
-    /* position: relative; */
+    position: relative;
     padding-left: 20;
     padding-right: 20;
     /* //padding-top: 37px; */
@@ -114,6 +114,7 @@
 
 @media screen and (min-width: 768px) {
   .container {
+    position: relative;
     padding-top: 40px;
     /* padding-bottom: 70px; */
     display: flex;

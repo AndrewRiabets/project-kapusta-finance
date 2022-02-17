@@ -21,10 +21,6 @@ export default function Balance({page}) {
   const dispatch = useDispatch();
 
   const onHandleChange = e => {
-    if (e.currentTarget.value.length === 0) {
-      setResBalance(null);
-      return
-    };
     setValueInput(e.currentTarget.value);
     setResBalance(e.currentTarget.value);
   };
