@@ -3,6 +3,7 @@ import { useDeleteTransactionMutation, useFetchAllTransactionsQuery } from '../.
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTransaction } from "../../../redux/finance/finance-selectors";
 import { getAccessToken } from "../../../redux/auth/auth-selectors";
+import * as actions from "../../../redux/finance/finance-actions";
 import Modal from '../../Multipurpose-modal/Multipurpose-modal';
 import items from "./expenses.json";
 import sprite from "../../../Images/sprite.svg";
@@ -30,6 +31,8 @@ const TableBalanceMob = () => {
   const handleDeleteTransaction = useCallback(async () => {
     try {
       const response = await removeTransaction({accessToken, delTransactionId});
+      dispatch(actions.allTransaction(response.data.data));
+      dispatch(actions.balance(response.data.total));
       onCloseModal();
     } catch (error) {
       console.log(error);
