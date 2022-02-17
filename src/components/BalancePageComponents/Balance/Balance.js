@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
-import { toast } from 'react-toastify';
+import toast, { Toaster } from "react-hot-toast";
 import 'react-toastify/dist/ReactToastify.css';
 import s from "../Balance/Balance.module.css";
 import ModalBalance from "../ModalBalance";
@@ -13,29 +13,50 @@ import { getBalance } from "../../../redux/finance/finance-selectors";
 
 export default function Balance({page}) {
   const balance = useSelector(getBalance);
-  const [resBalance, setResBalance] = useState('');
+  const [resBalance, setResBalance] = useState(null);
+  const [notification, setNotification] = useState(false);
   const accessToken = useSelector(getAccessToken);
   const [fetchResetBalance] = useFetchResetBalanceMutation();
   const dispatch = useDispatch();
 
   const onHandleChange = e => {
-    const inputValue = e.currentTarget.value;
-    setResBalance(inputValue);
+    console.log("e", e.currentTarget.value.length);
+    console.log("bal", balance);
+    if (e.currentTarget.value.length === 0) {
+      setResBalance(null);
+      return
+    };
+    setResBalance(e.currentTarget.value);
+   
   };
   
+  useEffect(() => {
+    setResBalance(balance);
+  }, [balance]);
 
      
       
-//       const onClickApprove = useCallback(async () => {
-//         e.preventDefault();
-//         if (!inputValue) {
-//          return toast.error('Пожалуйста, введите правильное значение!');
-//         };
-//         if (inputValue.trim() === '') {
-  
-// }
+  const onClickApprove = useCallback(async (e) => {
+    e.preventDefault();
+    if (resBalance === null) {
+      setNotification(true);
+      toast.error('Пожалуйста, введите правильное значение!');
+      setNotification(false);
+      return
+    };
 
-//   })
+  
+    try {
+      
+      const newBalance = { balance: Number(resBalance) };
+    
+      const response = await fetchResetBalance({ accessToken, newBalance });
+      dispatch(actions.balance(response));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [accessToken, dispatch, fetchResetBalance, resBalance]);
+
 
   return (
     <div className={s.container}>
@@ -45,17 +66,20 @@ export default function Balance({page}) {
         </h2>
 
         <form className={s.wrapperBalance}
-          // onSubmit={onClickApprove}
+          onSubmit={onClickApprove}
         >
           <div className={s.form}>
             <div className={s.wrapperBtn}>
               <input
-                className={`${s.money} ${s.btn} ${page !== 'balance' && s.reportPageInput}`}
-                name="balance"
-                type="number"
-                id="balanceId"
-                onChange={onHandleChange}
-                placeholder={`${balance} UAH`}
+              className={`${s.money} ${s.btn} ${page !== 'balance' && s.reportPageInput}`}
+              name="nameBalance"
+              id="balanceId"
+              type='text'
+              pattern="^\d*(\.\d{0,2})?$"
+              title="Введите положительное число"
+              required
+              onChange={onHandleChange}
+              placeholder={resBalance === null ? '00.00 UAH' : resBalance}
               />
               <button
             className={`${s.confirm} ${s.btn} ${page !== 'balance' && s.reportPagedisplay}`}
@@ -68,7 +92,8 @@ export default function Balance({page}) {
           </div>
         </form>
       </div>
-      {!+balance && <ModalBalance />}
+      {balance <= 0 && <ModalBalance />}
+      { <Toaster position="top-right" />}
     </div>
   );
 }
