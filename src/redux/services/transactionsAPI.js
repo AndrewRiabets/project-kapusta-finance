@@ -8,13 +8,13 @@ export const transactionsApi = createApi({
   }),
   endpoints: (builder) => ({
     fetchResetBalance: builder.mutation({
-      query: ({ accessToken, resBalance }) => ({
+      query: ({ accessToken, newBalance }) => ({
         url: `/reset-balance`,
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        body: resBalance
+        body: {...newBalance}
       }),
       invalidatesTags: ["Banking"],
     }),
