@@ -3,12 +3,13 @@ import { combineReducers } from "redux";
 import * as actions from "./report-actions";
 
 const initialState = {
-    summary: [],
-    categoryProfit: [],
-    categoryCosts: [],
+  summary: [],
+  categoryProfit: [],
+  categoryCosts: [],
   categoryItems: [],
-    date: '',
-}
+  date: "",
+  active: null,
+};
 
 const summary = createReducer(initialState.summary, {
   [actions.summary]: (_, { payload }) => payload,
@@ -25,11 +26,15 @@ const categoryItems = createReducer(initialState.categoryItems, {
 const date = createReducer(initialState.date, {
   [actions.date]: (_, { payload }) => payload,
 });
+const active = createReducer(initialState.active, {
+  [actions.active]: (_, { payload }) => payload,
+});
 
 export default combineReducers({
-    summary,
-    categoryProfit,
-    categoryCosts,
-    categoryItems,
-    date,
-})
+  summary,
+  categoryProfit,
+  categoryCosts,
+  categoryItems,
+  date,
+  active,
+});
