@@ -58,9 +58,8 @@
   text-transform: uppercase;
 }
 .buttonExpenseMob:hover {
-  background-color: var(--accent-color);
-  color: var(--bg-text-color);
-  filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+  color: #fff;
+  background:var(--accent-color);
   transition: var(--time) var(--timing);
 }
 .buttonGoBack {
@@ -103,9 +102,8 @@
     background: var(--bg-tab-selected);
   }
   .buttonExpense:hover {
-    /* color: var(--text-color-3); */
-    color: var(--accent-color);
-    filter: drop-shadow(1px 0px 5px rgba(255, 107, 8, 0.35));
+    color: #fff;
+    background:var(--accent-color);
     transition: var(--time) var(--timing);
   }
   .transactionTableSummaryContainer {

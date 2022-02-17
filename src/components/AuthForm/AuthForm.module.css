@@ -104,7 +104,7 @@
     text-align: left;
     letter-spacing: 0.04em;
     padding: auto;
-    color: #a6abb9;
+    color: var(--text-color);
     background-color: #f6f7fb;
     width: 253px;
     height: 52px;
@@ -112,7 +112,7 @@
     border-radius: 30px;
     box-shadow: 0 0px 1px 0 rgb(0 0 0 / 2%), 0 1px 1px 0 rgb(0 0 0 / 2%);
   }
-  .email,
+  .email::placeholder,
   .password::placeholder {
     color: #a6abb9;
   }

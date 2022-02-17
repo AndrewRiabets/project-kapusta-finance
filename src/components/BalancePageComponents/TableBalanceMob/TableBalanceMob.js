@@ -39,7 +39,10 @@ const TableBalanceMob = () => {
     }
 }, [accessToken, delTransactionId, onCloseModal, removeTransaction]);
 
-
+const reverse = (s)=>{
+  const substring = s.substr(0,10);
+  return substring.split("-").reverse().join(".");
+}
   return (
     <>
       <div className={s.tableBodyScroll}>
@@ -50,7 +53,7 @@ const TableBalanceMob = () => {
                 <div className={s.tableItemWrapper}>
                   <p className={s.tdDescr}>{el.description}</p>
                   <div className={s.dateCategoryWrapper}>
-                    <p className={s.tdDate}>{el.dateTransaction.substr(0,10)}</p>
+                    <p className={s.tdDate}>{reverse(el.dateTransaction)}</p>
                     <p className={s.tdCtg}>{el.categoryName}</p>
                   </div>
                 </div>
