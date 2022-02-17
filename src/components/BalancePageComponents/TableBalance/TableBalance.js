@@ -42,6 +42,11 @@ const TableBalance = ({type}) => {
   const expenses = transaction.filter((el) => el.isProfit === false);
   const income = transaction.filter((el) => el.isProfit === true);
 
+  const reverse = (s)=>{
+    const substring = s.substr(0,10);
+    return substring.split("-").reverse().join(".");
+  }
+
   return (
     <>
       <div className={s.tableHead}>
@@ -65,7 +70,7 @@ const TableBalance = ({type}) => {
                   {expenses.map((el) => (
                     <tr className={s.tableRow} key={el._id}>
                       <td className={s.thDate}>
-                        {el.dateTransaction.substr(0, 10)}
+                        {reverse(el.dateTransaction)}
                       </td>
                       <td className={s.tdDescr}>{el.description}</td>
                       <td className={s.thCtg}>{el.categoryName}</td>
@@ -101,7 +106,7 @@ const TableBalance = ({type}) => {
             <tbody className={s.tableBody}>
               {income.map((el) => (
                 <tr className={s.tableRow} key={el._id}>
-                  <td className={s.thDate}>{el.dateTransaction.substr(0, 10)}</td>
+                  <td className={s.thDate}>{reverse(el.dateTransaction)}</td>
                   <td className={s.tdDescr}>{el.description}</td>
                   <td className={s.thCtg}>{el.categoryName}</td>
                   <td className={s.tdSum}>

@@ -72,7 +72,6 @@
   overflow-x: hidden;
   margin-top: 0px;
   border-top: none;
-  border-bottom: 1px solid var(--bg-color);
 }
 .tableBodyScroll::-webkit-scrollbar {
   width: 6px;

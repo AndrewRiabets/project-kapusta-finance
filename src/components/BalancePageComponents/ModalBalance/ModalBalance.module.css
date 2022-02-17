@@ -1,12 +1,14 @@
 .modal_balance {
   border-radius: 30px;
   background: linear-gradient(120deg, #1d346a 3%, #031634 69%);
-  max-height: 163px;
-  max-width: 282px;
+  height: 163px;
+  width: 282px;
   padding: 30px 25px 31px 25px;
   position: absolute;
-  top: 243px;
-  left: 18px;
+  /* top: 243px;
+  left: 18px; */
+  top: 77px;
+  left: -8px;
   margin-left: auto;
   margin-right: auto;
   z-index: 1;
@@ -41,17 +43,21 @@
 @media screen and (min-width: 768px) {
   .modal_balance {
     position: absolute;
-    top: 160px;
-    left: 173px;
+    /* top: 160px;
+    left: 173px; */
+    top: 105px;
+    left: 54px;
   }
 }
 
 @media screen and (min-width: 1280px) {
   .modal_balance {
     position: absolute;
-    top: 162px;
-    left: 522px;
-    max-height: 163px;
-    max-width: 292px;
+    top: 105px;
+    left: 50px;
+    /* top: 162px;
+    left: 522px; */
+    height: 163px;
+    width: 292px;
   }
 }
