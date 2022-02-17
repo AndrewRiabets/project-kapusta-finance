@@ -17,7 +17,6 @@ import { useFetchSummaryMutation } from '../../redux/services/reportAPI';
 
 import { getAccessToken } from "../../redux/auth/auth-selectors";
 import * as actions from "../../redux/finance/finance-actions";
-import { getSummary } from '../../redux/report/report-selectors';
 import * as action from '../../redux/report/report-actions';
 
 import s from "./BalancePage.module.css";
@@ -30,7 +29,7 @@ const BalancePage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const viewPort = useWindowDimensions();
   const accessToken = useSelector(getAccessToken);
-  const [fetchAllTransactions] = useFetchAllTransactionsMutation();
+  const [fetchAllTransactions, {isLoading}] = useFetchAllTransactionsMutation();
 
   const [fetchSummary] = useFetchSummaryMutation();
   const dispatch = useDispatch();
@@ -69,8 +68,8 @@ const BalancePage = () => {
   }, [accessToken, fetchSummary, sendSummaryInStore]);
 
   useEffect(() => {
-    getAllTransactions();
-    getSummaryReport();
+      getAllTransactions();
+      getSummaryReport();
   }, [getAllTransactions, getSummaryReport]);
 
   const btnTypeToggle = (e) => {
@@ -82,18 +81,13 @@ const BalancePage = () => {
     return listRender ? setListRender(false) : setListRender(true);
   };
 
-  const summary = useSelector(getSummary);
-
-  const conditionSummaryExp = summary.map((month) => month.costs.totalAmount);
-  const conditionSummaryInc = summary.map((month) => month.profit.totalAmount);
-  
   return (
     <>
       <Container>
         {viewPort.width >= 768 && (
           <>
             <div className={s.balanceWrapper}>
-              <Balance page={page}/>
+              <Balance page={page} showModal={isLoading}/>
               <GoToReports />
             </div>
             <div className={s.buttons}>
@@ -123,13 +117,10 @@ const BalancePage = () => {
                   <TableBalance type={type} />
                 </div>
 
-                { typeof conditionSummaryExp[0] !== 'undefined' &&
-                  typeof conditionSummaryInc[0] !== 'undefined' &&
-                  (<SummaryTable
+                <SummaryTable
                   type={type}
                   title="СВОДКА"
                   />
-                  )}
               </>
             )}
             {viewPort.width >= 1280 && (
@@ -138,13 +129,10 @@ const BalancePage = () => {
                 <div className={s.tableSummaryContainer}>
                   <TableBalance type={type} />
 
-                  { typeof conditionSummaryExp[0] !== 'undefined' &&
-                    typeof conditionSummaryInc[0] !== 'undefined' &&
-                    (<SummaryTable
+                  <SummaryTable
                     type={type}
                     title="СВОДКА"
                     />
-                    )}
                   
                 </div>
               </div>
@@ -158,7 +146,7 @@ const BalancePage = () => {
                 <div className={s.balanceWrapper}>
                   <GoToReports />
                   <div className={s.balance}>
-                    <Balance page={page}/>
+                    <Balance page={page} showModal={isLoading}/>
                   </div>
                 </div>
 

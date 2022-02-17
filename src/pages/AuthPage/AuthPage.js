@@ -6,20 +6,17 @@ import styled, { keyframes } from 'styled-components';
 
 import style from "./AuthPage.module.css";
 
+const SlideInRight = styled.div`animation: 2s ${keyframes`${slideInRight}`} `;
+
 const AuthPage = () => {
-  const SlideInRight = styled.div`animation: 2s ${keyframes`${slideInRight}`} `;
   return (
     <>
       <Container>
         <div className={style.authContainer}>
           <AuthPageTitle />
-        
           <SlideInRight>
             <AuthForm />
-</SlideInRight>
-            
-    
-          
+          </SlideInRight> 
         </div>
       </Container>
     </>

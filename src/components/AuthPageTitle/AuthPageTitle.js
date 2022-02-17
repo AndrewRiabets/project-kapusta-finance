@@ -5,8 +5,9 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { rollIn } from "react-animations";
 import styled, { keyframes } from 'styled-components';
 
+const Rollin = styled.div`animation: 2s ${keyframes`${rollIn}`} `;
+
 const AuthPageTitle = () => {
-  const Rollin = styled.div`animation: 2s ${keyframes`${rollIn}`} `;
    
   const viewPort = useWindowDimensions();
 
