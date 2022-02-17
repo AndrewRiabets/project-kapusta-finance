@@ -11,10 +11,9 @@ import { getAccessToken } from "../../../redux/auth/auth-selectors";
 import * as actions from "../../../redux/finance/finance-actions";
 import { getBalance } from "../../../redux/finance/finance-selectors";
 
-export default function Balance({page}) {
+export default function Balance({page, showModal}) {
   const balance = useSelector(getBalance);
   const [resBalance, setResBalance] = useState(null);
-  const [notification, setNotification] = useState(false);
   const [valueInput, setValueInput] = useState('');
   const accessToken = useSelector(getAccessToken);
   const [fetchResetBalance] = useFetchResetBalanceMutation();
@@ -37,9 +36,7 @@ export default function Balance({page}) {
   const onClickApprove = useCallback(async (e) => {
     e.preventDefault();
     if (resBalance === null) {
-      setNotification(true);
       toast.error('Пожалуйста, введите правильное значение!');
-      setNotification(false);
       return
     };
 
@@ -49,9 +46,7 @@ export default function Balance({page}) {
       const response = await fetchResetBalance({ accessToken, newBalance });
       dispatch(actions.balance(response.data.balance));
       setValueInput('');
-      setNotification(true);
       toast.success('Баланс обновлен!');
-      setNotification(false);
     } catch (error) {
       console.log(error);
     }
@@ -93,7 +88,7 @@ export default function Balance({page}) {
           </div>
         </form>
       </div>
-      {balance <= 0 && <ModalBalance />}
+      {(balance === 0 && !showModal) && <ModalBalance />}
       { <Toaster position="top-right" />}
     </div>
   );

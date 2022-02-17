@@ -30,7 +30,7 @@ const BalancePage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const viewPort = useWindowDimensions();
   const accessToken = useSelector(getAccessToken);
-  const [fetchAllTransactions] = useFetchAllTransactionsMutation();
+  const [fetchAllTransactions, {isLoading}] = useFetchAllTransactionsMutation();
 
   const [fetchSummary] = useFetchSummaryMutation();
   const dispatch = useDispatch();
@@ -69,8 +69,8 @@ const BalancePage = () => {
   }, [accessToken, fetchSummary, sendSummaryInStore]);
 
   useEffect(() => {
-    getAllTransactions();
-    getSummaryReport();
+      getAllTransactions();
+      getSummaryReport();
   }, [getAllTransactions, getSummaryReport]);
 
   const btnTypeToggle = (e) => {
@@ -93,7 +93,7 @@ const BalancePage = () => {
         {viewPort.width >= 768 && (
           <>
             <div className={s.balanceWrapper}>
-              <Balance page={page}/>
+              <Balance page={page} showModal={isLoading}/>
               <GoToReports />
             </div>
             <div className={s.buttons}>
@@ -158,7 +158,7 @@ const BalancePage = () => {
                 <div className={s.balanceWrapper}>
                   <GoToReports />
                   <div className={s.balance}>
-                    <Balance page={page}/>
+                    <Balance page={page} showModal={isLoading}/>
                   </div>
                 </div>
 
