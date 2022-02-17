@@ -28,7 +28,6 @@ export default function MultipleSlider() {
     arrows: false,
     asNavFor: '.slider__first',
     centerPadding: '3px',
-    adaptiveHeight: true,
 
   };
   return (

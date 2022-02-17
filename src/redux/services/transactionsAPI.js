@@ -4,7 +4,7 @@ export const transactionsApi = createApi({
   reducerPath: "transactionsApi",
   tagTypes: ["Banking"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/banking",
+    baseUrl: "https://kapusta-finance.herokuapp.com/api/banking",
   }),
   endpoints: (builder) => ({
     fetchResetBalance: builder.mutation({
