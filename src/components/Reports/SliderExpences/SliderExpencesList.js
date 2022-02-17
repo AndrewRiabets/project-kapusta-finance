@@ -14,6 +14,8 @@ export default function SliderExpencesList({ data }) {
   const dispatch = useDispatch();
   const date = useSelector(getDate);
   const [fetchCategoryItems] = useFetchCategoryItemsMutation();
+  const categoryId = data[0]._id.categoryId 
+
 
   const sendDataInStore = useCallback(
     (response) => {
@@ -38,6 +40,15 @@ export default function SliderExpencesList({ data }) {
     },
     [accessToken, fetchCategoryItems, sendDataInStore]
   );
+
+ 
+
+  useEffect(() => {
+    
+    getItems({ categoryId, date })
+    dispatch(actions.active(categoryId));
+    
+  },[categoryId, data, date, dispatch, getItems])
 
   const handleClick = (e) => {
     dispatch(actions.active(e.currentTarget.dataset.index));
