@@ -7,6 +7,7 @@ import CurrentPeriod from "../../components/Reports/CurrentPeriod/CurrentPeriod"
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Balance from "../../components/BalancePageComponents/Balance/Balance";
 import { getSummary, getDate } from '../../redux/report/report-selectors';
+import { getBalance } from "../../redux/finance/finance-selectors";
 import * as actions from "../../redux/report/report-actions";
 import style from "./ReportPage.module.css";
 import s from "./bg.module.css";
@@ -17,7 +18,7 @@ const ReportPage = () => {
   const dispatch = useDispatch();
 
   const page='report'
-
+  const balance = useSelector(getBalance);
   const summary = useSelector(getSummary);
   const reversedSummary = [...summary].reverse();
   const currentDate = reversedSummary[0].startDate;
@@ -30,7 +31,7 @@ const ReportPage = () => {
 
   useEffect(() => {
     sendDateInStore()
-  },[sendDateInStore])
+  },[sendDateInStore, balance])
  
   return (
     <div className={s.bg_contaiter}>

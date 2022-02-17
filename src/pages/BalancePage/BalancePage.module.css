@@ -103,8 +103,9 @@
     background: var(--bg-tab-selected);
   }
   .buttonExpense:hover {
-    color: var(--text-color-3);
-    filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+    /* color: var(--text-color-3); */
+    color: var(--accent-color);
+    filter: drop-shadow(1px 0px 5px rgba(255, 107, 8, 0.35));
     transition: var(--time) var(--timing);
   }
   .transactionTableSummaryContainer {
@@ -139,10 +140,6 @@
     justify-content: space-between;
     flex-direction: row;
   }
-  /* .balanceWrapper {
-    max-width: 1279px;
-    justify-content: end;
-  } */
   .balanceWrapper {
     max-width: 1279px;
     flex-direction: row;

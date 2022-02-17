@@ -54,6 +54,7 @@ function TransactionForm({ type }) {
       try {
         const response = await addTransaction({ accessToken, newTransaction });
         dispatch(actions.allTransaction(response.data.data));
+        dispatch(actions.balance(response.data.total));
       } catch (error) {
         console.log(error);
       }

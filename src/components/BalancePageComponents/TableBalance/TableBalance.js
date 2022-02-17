@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { useDeleteTransactionMutation} from '../../../redux/services/transactionsAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../Multipurpose-modal/Multipurpose-modal';
@@ -37,10 +37,6 @@ const TableBalance = ({type}) => {
           console.log(error);
         }
   }, [accessToken, delTransactionId, dispatch, onCloseModal, removeTransaction]);
-
-  // useEffect(() => {
-  //   handleDeleteTransaction();
-  // }, [handleDeleteTransaction]);
 
   const expenses = transaction.filter((el) => el.isProfit === false);
   const income = transaction.filter((el) => el.isProfit === true);

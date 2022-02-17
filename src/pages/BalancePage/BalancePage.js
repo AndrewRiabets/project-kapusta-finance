@@ -25,7 +25,7 @@ import sprite from "../../Images/sprite.svg";
 
 const BalancePage = () => {
   const [type, setType] = useState("expense");
-  const [page, setPage] = useState("balance");
+  const page = "balance";
   const [listRender, setListRender] = useState(true);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const viewPort = useWindowDimensions();
@@ -94,7 +94,6 @@ const BalancePage = () => {
           <>
             <div className={s.balanceWrapper}>
               <Balance page={page}/>
-              {/* <ConfirmButton /> */}
               <GoToReports />
             </div>
             <div className={s.buttons}>
@@ -160,7 +159,6 @@ const BalancePage = () => {
                   <GoToReports />
                   <div className={s.balance}>
                     <Balance page={page}/>
-                    {/* <ConfirmButton /> */}
                   </div>
                 </div>
 
