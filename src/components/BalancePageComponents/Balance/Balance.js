@@ -15,26 +15,24 @@ export default function Balance({page}) {
   const balance = useSelector(getBalance);
   const [resBalance, setResBalance] = useState(null);
   const [notification, setNotification] = useState(false);
+  const [valueInput, setValueInput] = useState('');
   const accessToken = useSelector(getAccessToken);
   const [fetchResetBalance] = useFetchResetBalanceMutation();
   const dispatch = useDispatch();
 
   const onHandleChange = e => {
-    console.log("e", e.currentTarget.value.length);
-    console.log("bal", balance);
     if (e.currentTarget.value.length === 0) {
       setResBalance(null);
       return
     };
+    setValueInput(e.currentTarget.value);
     setResBalance(e.currentTarget.value);
-   
   };
   
   useEffect(() => {
     setResBalance(balance);
-  }, [balance]);
+  }, [balance, setResBalance]);
 
-     
       
   const onClickApprove = useCallback(async (e) => {
     e.preventDefault();
@@ -47,11 +45,13 @@ export default function Balance({page}) {
 
   
     try {
-      
       const newBalance = { balance: Number(resBalance) };
-    
       const response = await fetchResetBalance({ accessToken, newBalance });
-      dispatch(actions.balance(response));
+      dispatch(actions.balance(response.data.balance));
+      setValueInput('');
+      setNotification(true);
+      toast.success('Баланс обновлен!');
+      setNotification(false);
     } catch (error) {
       console.log(error);
     }
@@ -73,18 +73,19 @@ export default function Balance({page}) {
               <input
               className={`${s.money} ${s.btn} ${page !== 'balance' && s.reportPageInput}`}
               name="nameBalance"
+              disabled={page !== 'balance' && "disabled"}
               id="balanceId"
               type='text'
+              value={valueInput}
               pattern="^\d*(\.\d{0,2})?$"
               title="Введите положительное число"
               required
               onChange={onHandleChange}
-              placeholder={resBalance === null ? '00.00 UAH' : resBalance}
+              placeholder={balance === null ? '00.00 грн.' : `${balance} грн.`}
               />
               <button
             className={`${s.confirm} ${s.btn} ${page !== 'balance' && s.reportPagedisplay}`}
             type="submit"
-            
         >
             ПОДТВЕРДИТЬ
         </button>

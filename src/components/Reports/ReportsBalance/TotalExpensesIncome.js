@@ -32,11 +32,11 @@ function TotalExpensesIncome() {
       <ul className={styles.balanceList}>
         <li className={styles.balanceItem}>
           <p className={styles.balanceText}>Расходы:</p>
-          <span className={styles.expensesValue}>{`- ${expences} грн.`}</span>
+          <span className={styles.expensesValue}>{ expences?`- ${expences} грн.`:'00.00 грн.'}</span>
         </li>
         <li className={styles.balanceItem}>
           <p className={styles.balanceText}>Доходы:</p>
-          <span className={styles.incomeValue}>{`+ ${income} грн.`}</span>
+          <span className={styles.incomeValue}>{income?`+ ${income} грн.`:'00.00 грн.'}</span>
         </li>
       </ul>
     </div>

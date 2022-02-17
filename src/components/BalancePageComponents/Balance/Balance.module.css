@@ -55,6 +55,7 @@
     font-size: 12px;
     line-height: 1.17;
     letter-spacing: 0.02em;
+    cursor: pointer;
   }
   .confirm {
     /* margin-top: 8px; */
@@ -64,8 +65,7 @@
 
 }
 
-.confirm:hover,
-.confirm:focus {
+.confirm:hover {
     background: var(--accent-color);
     color: var(--bg-text-color);
 }
@@ -100,6 +100,8 @@
     border-radius: 22px;
     border: 2px solid var(--bg-text-color);
     width: 183px;
+    cursor: initial;
+
   }
 
   .icon {
@@ -174,11 +176,16 @@
     font-size: 12px;
     line-height: 1.17;
     letter-spacing: 0.02em;
+    cursor: pointer;
   }
   .confirm {
     margin-left: 15px;
     padding: 12px 6px;
     color: var(--text-color-2);
+}
+.confirm:hover {
+    background: var(--accent-color);
+    color: var(--bg-text-color);
 }
 .reportPagedisplay{
   display: none;
@@ -214,6 +221,9 @@
     height: 14px;
     margin-left: 15px;
   }
+  .reportPageInput{
+    cursor:initial;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -246,6 +256,7 @@
     font-size: 12px;
     line-height: 1.17;
     letter-spacing: 0.02em;
+    cursor: pointer;
   }
   .reportPagedisplay{
     display: block;
@@ -256,8 +267,7 @@
     cursor: pointer;
 }
 
-.confirm:hover,
-.confirm:focus {
+.confirm:hover {
     background: var(--accent-color);
     color: var(--bg-text-color);
 }
@@ -274,5 +284,8 @@
     width: 20px;
     height: 20px;
 
+  }
+  .reportPageInput{
+    cursor:initial;
   }
 }
