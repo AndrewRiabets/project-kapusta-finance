@@ -27,7 +27,7 @@ export default function Chart() {
 
     return (
         <div className={style.container}>
-          {viewPort.width > 768 ? (<ResponsiveContainer className={style.chart} width={containerWidth} height="100%">
+          {viewPort.width < 768 ? (<ResponsiveContainer className={style.chart} width={containerWidth} height="100%">
                 <BarChart data={data} margin={{ top: 30, right: 0, left: 0, bottom: 40 }}>
                     <CartesianGrid vertical={false} />
                     <YAxis hide tickCount={9} />
