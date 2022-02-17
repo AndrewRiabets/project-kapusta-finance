@@ -32,6 +32,7 @@ const TableBalance = ({type}) => {
         try {
           const response = await removeTransaction({ accessToken, delTransactionId });
           dispatch(actions.allTransaction(response.data.data));
+          dispatch(actions.balance(response.data.total));
           onCloseModal();
         } catch (error) {
           console.log(error);

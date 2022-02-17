@@ -72,7 +72,7 @@
   .btn {
     padding: 0px;
     cursor: pointer;
-    padding-right: 30px;
+    /* padding-right: 30px; */
   }
   .name {
     margin-right: 10px;
