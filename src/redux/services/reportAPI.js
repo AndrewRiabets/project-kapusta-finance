@@ -9,12 +9,11 @@ export const reportAPI = createApi({
   endpoints: (builder) => ({
     fetchSummary: builder.mutation({
       query: ({ accessToken }) => ({
-
         url: `/summary/`,
         method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
-        }
+        },
       }),
       invalidatesTags: ["Report"],
     }),
@@ -52,11 +51,11 @@ export const reportAPI = createApi({
       invalidatesTags: ["Report"],
     }),
   }),
-})
+});
 
 export const {
-    useFetchSummaryMutation,
-    useFetchCategoryProfitMutation,
-    useFetchCategoryCostsMutation,
-    useFetchCategoryItemsMutation
-} = reportAPI
+  useFetchSummaryMutation,
+  useFetchCategoryProfitMutation,
+  useFetchCategoryCostsMutation,
+  useFetchCategoryItemsMutation,
+} = reportAPI;
