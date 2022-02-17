@@ -4,8 +4,8 @@ export const reportAPI = createApi({
   reducerPath: "reportAPI",
   tagTypes: ["Report"],
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://kapusta-finance.herokuapp.com/api/statistic",
-    baseUrl: 'http://localhost:3001/api/statistic',
+    baseUrl: "https://kapusta-finance.herokuapp.com/api/statistic",
+    // baseUrl: 'http://localhost:3001/api/statistic',
   }),
   endpoints: (builder) => ({
     fetchSummary: builder.mutation({
