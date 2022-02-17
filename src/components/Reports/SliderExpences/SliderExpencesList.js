@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
+import sprite from "./sprite.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { useFetchCategoryItemsMutation } from "../../../redux/services/reportAPI";
 import { getAccessToken } from "../../../redux/auth/auth-selectors";
 import { getDate } from "../../../redux/report/report-selectors";
 import * as actions from "../../../redux/report/report-actions";
-import sprite from "../../../Images/sprite.svg";
 import style from "./SliderExpences.module.css";
 import { getActive } from "../../../redux/report/report-selectors";
 
