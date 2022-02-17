@@ -1,5 +1,6 @@
 import { Oval } from 'react-loader-spinner'
 import style from './GoogleRedirect.module.css'
+import { useLocation } from 'react-router'
 import { useDispatch } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { useRefreshTokenMutation } from '../../redux/services/authAPI'
@@ -8,6 +9,7 @@ import * as actions from '../../redux/auth/auth-actions'
 export default function GoogleRedirect() {
     const dispatch = useDispatch()
     const [getCurrentUser] = useRefreshTokenMutation()
+    const location = useLocation()
 
     const sendDataInStore = useCallback(
     (response) => {
@@ -18,16 +20,34 @@ export default function GoogleRedirect() {
     [dispatch]
   );
 
+  const loginByParams = useCallback(() => {
+    const accessToken = new URLSearchParams(location.search).get('accessToken')
+    const email = new URLSearchParams(location.search).get('email')
+    const id = new URLSearchParams(location.search).get('id')
+    const response = {
+      data: {
+        user: {
+          id: id,
+          email: email,
+        },
+        accessToken: accessToken
+      }
+    }
+    sendDataInStore(response)
+  }, [location.search, sendDataInStore])
+
     const loginByGoogle = useCallback(async () => {
-        try {
-            const response = await getCurrentUser()
-            if (response.data) {
-              sendDataInStore(response)
-            }
-        } catch (error) {
-            console.log(error);
+      try {
+        const response = await getCurrentUser()
+        if (response.data) {
+          sendDataInStore(response)
+          return
         }
-    }, [getCurrentUser, sendDataInStore]) 
+        loginByParams()
+        } catch (error) {
+          console.log(error);
+        }
+    }, [getCurrentUser, loginByParams, sendDataInStore]) 
 
     useEffect(() => {
       loginByGoogle()
