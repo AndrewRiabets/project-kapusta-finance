@@ -36,7 +36,6 @@ export default function Balance({page, showModal}) {
       return
     };
 
-  
     try {
       const newBalance = { balance: Number(resBalance) };
       const response = await fetchResetBalance({ accessToken, newBalance });

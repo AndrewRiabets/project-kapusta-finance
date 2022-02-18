@@ -10,7 +10,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { getAccessToken } from "../../../redux/auth/auth-selectors";
 import * as actions from "../../../redux/finance/finance-actions";
+import * as action from '../../../redux/report/report-actions';
 import { useAddTransactionMutation } from "../../../redux/services/transactionsAPI";
+import { useFetchSummaryMutation } from '../../../redux/services/reportAPI';
 
 import categoryName from "../../../helpers/categoryList";
 import DropDownList from "../DropDownList/DropDownList";
@@ -28,6 +30,7 @@ const FormSchema = Yup.object().shape({
 function TransactionForm({ type }) {
   const accessToken = useSelector(getAccessToken);
   const [addTransaction] = useAddTransactionMutation();
+  const [fetchSummary] = useFetchSummaryMutation();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [placeholderCategories, setPlaceholderCategories] = useState("");
@@ -53,8 +56,10 @@ function TransactionForm({ type }) {
     async (newTransaction) => {
       try {
         const response = await addTransaction({ accessToken, newTransaction });
+        const resp = await fetchSummary({ accessToken });
         dispatch(actions.allTransaction(response.data.data));
         dispatch(actions.balance(response.data.total));
+        dispatch(action.summary(resp.data));
       } catch (error) {
         console.log(error);
       }

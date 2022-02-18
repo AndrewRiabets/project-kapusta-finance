@@ -30,7 +30,6 @@ const BalancePage = () => {
   const viewPort = useWindowDimensions();
   const accessToken = useSelector(getAccessToken);
   const [fetchAllTransactions, {isLoading}] = useFetchAllTransactionsMutation();
-
   const [fetchSummary] = useFetchSummaryMutation();
   const dispatch = useDispatch();
 
@@ -60,7 +59,6 @@ const BalancePage = () => {
   const getSummaryReport = useCallback(async () => {
     try {
       const response = await fetchSummary({ accessToken });
-
       sendSummaryInStore(response);
     } catch (error) {
       console.log(error);

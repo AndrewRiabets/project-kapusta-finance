@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
-import { useDeleteTransactionMutation} from '../../../redux/services/transactionsAPI';
+import { useDeleteTransactionMutation } from '../../../redux/services/transactionsAPI';
+import { useFetchSummaryMutation } from '../../../redux/services/reportAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../Multipurpose-modal/Multipurpose-modal';
 import * as actions from "../../../redux/finance/finance-actions";
+import * as action from "../../../redux/report/report-actions";
 import { getAllTransaction } from "../../../redux/finance/finance-selectors";
 import { getAccessToken } from "../../../redux/auth/auth-selectors";
 import sprite from "../../../Images/sprite.svg";
@@ -16,6 +18,7 @@ const TableBalance = ({type}) => {
   const transaction = useSelector(getAllTransaction);
   const accessToken = useSelector(getAccessToken);
   const [removeTransaction] = useDeleteTransactionMutation();
+  const [fetchSummary] = useFetchSummaryMutation();
   
   const onOpenModal = useCallback((e) => {
     setShowModal(true);
@@ -31,8 +34,10 @@ const TableBalance = ({type}) => {
      
         try {
           const response = await removeTransaction({ accessToken, delTransactionId });
+          const resp = await fetchSummary({ accessToken });
           dispatch(actions.allTransaction(response.data.data));
           dispatch(actions.balance(response.data.total));
+          dispatch(action.summary(resp.data));
           onCloseModal();
         } catch (error) {
           console.log(error);

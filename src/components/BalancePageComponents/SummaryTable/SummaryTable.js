@@ -1,13 +1,14 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { getSummary } from '../../../redux/report/report-selectors';
 import styles from './SummaryTable.module.css';
 
 function SummaryTable({ type, title }) {
   const summary = useSelector(getSummary);
-  const summaryReverse = [...summary].reverse()
-  const filterSummaryCoast = summaryReverse.filter(el => el.costs.totalAmount !== undefined)
-  const filterSummaryProfit = summaryReverse.filter(el => el.profit.totalAmount !== undefined)
+    
+  const summaryReverse = [...summary].reverse();
+  const filterSummaryCoast = summaryReverse.filter(el => el.costs.totalAmount !== undefined);
+  const filterSummaryProfit = summaryReverse.filter(el => el.profit.totalAmount !== undefined);
 
     return (
       <table className={styles.table}>
