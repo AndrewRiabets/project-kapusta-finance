@@ -7,7 +7,7 @@ import style from './Chart.module.css'
 
 export default function Chart() { 
 
-    const [isAnimeted, setIsAnimated] = useState(false)
+    const [isAnimeted, setIsAnimated] = useState(false);
     const viewPort = useWindowDimensions();
     const list = useSelector(getCategoryItems);
     const data = [...list].map(item => {
@@ -25,11 +25,7 @@ export default function Chart() {
     const colors = [
          '#FF751D','#FFDAC0'
     ]
-
-    useEffect(() => {
-        setIsAnimated(false)
-    },[])
-    
+        
 
     return (
         <div className={style.container}>
