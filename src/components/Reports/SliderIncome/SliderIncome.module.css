@@ -69,3 +69,13 @@
   fill: var(--accent-color);
   background-color: #ffdac0;
 }
+
+.active {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: visible;
+  outline: none;
+  cursor: pointer;
+  fill: var(--accent-color);
+}
